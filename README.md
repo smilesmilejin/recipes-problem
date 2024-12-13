@@ -66,3 +66,24 @@ Produces
 ```py
 [("Sam", ["Beef", "Cheese", "Tortilla"]), ("Hallie", ["Oil", "Potato"])]
 ```
+
+## Notes for the Interviewer
+
+### Clarifying Questions
+
+#### Q: How should I handle invalid input?
+A: You can assume the input will be valid.
+
+#### Q: How should I handle empty input? Or input with only one chef?
+A: You can assume the input will be non-empty and have at least two chefs.
+
+#### Q: Does capitalization matter?
+A: Yes.
+
+### Hints
+
+- If your candidate is struggling to form an algorithm, encourage them to explain how they would do it by hand. Afterwards help them to see what data structures might be useful.
+
+- If your candidate is struggling with a subpart of the problem (e.g. sorting or getting the top 2), encourage them to first focus on writing a solution to a simpler version of the problem that does not include those requirements.
+
+- If your candidate is struggling to get unique elements, ask them what data structure (sets) could help them there.
