@@ -1,27 +1,72 @@
+# def most_varied(recipes):
+#     # Write your solution here!
+#     pass
+
+#     # Method 1
+#     # chef_ingrediants = {}, key: chef, value: set - list of ingredients
+
+#     # loop through recipes
+#         # if chef in chef_ingrediants  up pack
+#             # add recipes
+#         # if not in chef_ingrediatns
+#             # initialize the ditionary, check: recipts
+
+#         # sort the dictoinarys based on the lenght of recipts
+
+#         # return the last two from the last dictoinaries
+
+#     chef_ingrediants = {}
+
+#     for recipe_name, chef, ingredients in recipes:
+#         # print(recipe_name)
+#         # print(chef)
+#         # print(ingredients)
+
+#         if chef in chef_ingrediants:
+#             chef_ingrediants[chef].update(set(ingredients))
+#         elif chef not in chef_ingrediants:
+#             chef_ingrediants[chef] = set()
+#             chef_ingrediants[chef].update(set(ingredients))
+
+#     print(chef_ingrediants)
+
+#     sorted_chef_ingrediants = sorted(chef_ingrediants.values(), key=lambda ingredients: len(ingredients))
+    
+#     print(sorted_chef_ingrediants)
+
+#     # top two ingreditans
+#     top_two_ingrediants = []
+
+#     start = -1
+#     count = 2
+#     while count > 0:
+#         sorted_ingredients = sorted(sorted_chef_ingrediants[start])
+#         top_two_ingrediants.append(sorted_ingredients)
+#         count -= 1
+#         start -= 1
+    
+#     print(top_two_ingrediants)
+
+#     top_1 = set(top_two_ingrediants[0])
+#     top_2 = set(top_two_ingrediants[1])
+
+#     result =[None for i in range(2)]
+#     # find chef of top two ingrediants
+#     for chef, ingrediants in chef_ingrediants.items():
+#         if ingrediants == top_1:
+#             result[0] = (chef, top_two_ingrediants[0])
+#         if ingrediants == top_2:
+#             result[1] = (chef, top_two_ingrediants[1])
+
+
+#     return result 
+
+
+# Method 2
 def most_varied(recipes):
-    # Write your solution here!
-    pass
-
-    # Method 1
-    # chef_ingrediants = {}, key: chef, value: set - list of ingredients
-
-    # loop through recipes
-        # if chef in chef_ingrediants  up pack
-            # add recipes
-        # if not in chef_ingrediatns
-            # initialize the ditionary, check: recipts
-
-        # sort the dictoinarys based on the lenght of recipts
-
-        # return the last two from the last dictoinaries
 
     chef_ingrediants = {}
-
     for recipe_name, chef, ingredients in recipes:
-        # print(recipe_name)
-        # print(chef)
-        # print(ingredients)
-
         if chef in chef_ingrediants:
             chef_ingrediants[chef].update(set(ingredients))
         elif chef not in chef_ingrediants:
@@ -30,37 +75,36 @@ def most_varied(recipes):
 
     print(chef_ingrediants)
 
-    sorted_chef_ingrediants = sorted(chef_ingrediants.values(), key=lambda ingredients: len(ingredients))
+    # sort a dictionary based on the length of its values, descending: reverse=True
+    # sorting a dictionary will give you a new one (usually as a list of tuples 
+    sorted_chef_ingrediants = sorted(chef_ingrediants.items(), key=lambda ingredients: len(ingredients[1]), reverse=True)
+    
+    # [
+    #     ('Xinting', {'Carrot', 'Onion', 'Beef', 'Chicken Stock', 'Tomato', 'Peas'}), 
+    #     ('Amy', {'Pepper', 'Tater tots', 'Cheese', 'Chicken Cream'}), 
+    #     ('Sam', {'Tortilla', 'Cheese', 'Beef'}), 
+    #     ('Hallie', {'Oil', 'Potato'})
+    # ]
     
     print(sorted_chef_ingrediants)
 
     # top two ingreditans
     top_two_ingrediants = []
 
-    start = -1
-    count = 2
-    while count > 0:
-        sorted_ingredients = sorted(sorted_chef_ingrediants[start])
-        top_two_ingrediants.append(sorted_ingredients)
-        count -= 1
-        start -= 1
+    count = 0
+    index = 0
+
+    while count < 2:
+        chef = sorted_chef_ingrediants[index][0]
+        sorted_ingredients = sorted(sorted_chef_ingrediants[index][1])
+        top_two_ingrediants.append((chef, sorted_ingredients))
+        count += 1
+        index += 1
     
     print(top_two_ingrediants)
 
-    top_1 = set(top_two_ingrediants[0])
-    top_2 = set(top_two_ingrediants[1])
 
-    result =[None for i in range(2)]
-    # find chef of top two ingrediants
-    for chef, ingrediants in chef_ingrediants.items():
-        if ingrediants == top_1:
-            result[0] = (chef, top_two_ingrediants[0])
-        if ingrediants == top_2:
-            result[1] = (chef, top_two_ingrediants[1])
-
-
-    return result 
-
+    return top_two_ingrediants
 
 
 recipes_1 = [
@@ -73,7 +117,7 @@ recipes_1 = [
     ("Pea Soup", "Xinting", ("Peas", "Onion", "Carrot", "Chicken Stock")),
 ]
 
-# print(most_varied(recipes_1))
+print(most_varied(recipes_1))
 
 assert most_varied(recipes_1) == [
     ("Xinting", ["Beef", "Carrot", "Chicken Stock", "Onion", "Peas", "Tomato"]), 
