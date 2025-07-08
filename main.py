@@ -124,6 +124,8 @@ def most_varied(recipes):
     sorted_chef_ingrediants = list(chef_ingrediants.items())
     # print(sorted_chef_ingredients)
 
+    # item is a tuple like ('Alice', {'tomato', 'basil'})
+    # item[1] is the set of ingredients → {'tomato', 'basil'}
     sorted_chef_ingrediants.sort(key=lambda item: len(item[1]), reverse=True)
     # print(sorted_chef_ingredients)
 
